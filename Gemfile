@@ -39,7 +39,7 @@ gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
-gem "lexxy", "~> 0.8.0.beta"
+gem "lexxy", "~> 0.9.9.beta"
 gem "rubyzip"
 gem "phlex-rails"
 gem "tailwindcss-rails"
