@@ -4,7 +4,7 @@ class Public::FeedController < Public::BaseController
     fresh_when @essays
 
     respond_to do |format|
-      format.html { render Views::Public::Feed::IndexView.new(essays: @essays) }
+      format.html
       format.rss
     end
   end

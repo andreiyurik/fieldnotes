@@ -1,0 +1,12 @@
+<% content_for :title, "Essays" %>
+<% content_for :head do %>
+  <%= meta_tags(title: "Essays", description: "Writing on software, technology, and building things.") %>
+<% end %>
+
+<h1 class="text-3xl font-bold tracking-tight mb-8">Essays</h1>
+
+<% if @essays.empty? %>
+  <p class="text-muted text-center py-16">No essays yet.</p>
+<% else %>
+  <%= render partial: "public/essays/card", collection: @essays, as: :essay %>
+<% end %>

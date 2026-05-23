@@ -1,0 +1,29 @@
+<%# locals: (series:) %>
+<% cover_item = series.field_items.find { |item| item.photo.attached? } %>
+<article class="bg-surface border border-border rounded-lg overflow-hidden relative cursor-pointer transition hover:-translate-y-0.5 hover:shadow-md">
+  <% if cover_item %>
+    <div class="w-full aspect-video overflow-hidden">
+      <%= picture_tag(cover_item.photo, alt: series.title, sizes: "(max-width: 768px) 100vw, 50vw") %>
+    </div>
+  <% end %>
+
+  <div class="p-5">
+    <h2 class="text-lg font-bold mb-1">
+      <%= link_to series.title, field_path(series.slug), class: "text-ink hover:text-accent after:absolute after:inset-0 after:content-['']" %>
+    </h2>
+    <% if series.description.present? %>
+      <p class="text-muted text-sm mb-3"><%= series.description %></p>
+    <% end %>
+    <div class="flex items-center gap-3 flex-wrap">
+      <%= badge(series.kind) %>
+      <% if series.location.present? %>
+        <span class="text-muted text-sm">📍 <%= series.location %></span>
+      <% end %>
+      <% if series.taken_on.present? %>
+        <time class="text-muted text-sm" datetime="<%= series.taken_on.iso8601 %>">
+          <%= series.taken_on.strftime("%b %Y") %>
+        </time>
+      <% end %>
+    </div>
+  </div>
+</article>

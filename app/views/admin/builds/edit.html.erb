@@ -1,0 +1,12 @@
+<% content_for :title, "Edit Build" %>
+
+<%= admin_toolbar(title: "Edit Build") %>
+<%= render "form", build: @build %>
+
+<hr class="border-none border-t border-[#E8E3DC] my-8">
+<div class="flex items-center gap-4">
+  <p class="text-xs text-[#78716C] m-0">Danger Zone</p>
+  <%= button_to "Delete Build", admin_build_path(@build), method: :delete,
+        class: btn_danger_class,
+        form: { data: { turbo_confirm: "Delete «#{@build.title}»?" } } %>
+</div>

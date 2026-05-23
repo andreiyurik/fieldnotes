@@ -5,7 +5,6 @@ class PasswordsController < ApplicationController
   rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_password_path, alert: "Try again later." }
 
   def new
-    render Views::Passwords::NewView.new
   end
 
   def create
@@ -17,7 +16,6 @@ class PasswordsController < ApplicationController
   end
 
   def edit
-    render Views::Passwords::EditView.new(token: params[:token])
   end
 
   def update

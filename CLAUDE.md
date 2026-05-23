@@ -14,28 +14,28 @@ For architecture decisions and philosophy, see `docs/architecture.md`.
 | Database | SQLite via Litestack |
 | Jobs / Cache / WS | Solid Queue · Solid Cache · Solid Cable |
 | Assets | Propshaft · Importmaps · Stimulus |
-| Views | **Phlex** components (`app/views/components/`) |
+| Views | **ERB** templates + partials (DHH style) |
 | Styling | **Tailwind CSS v4** (via `tailwindcss-rails`) |
 | Rich text | Action Text + **Lexxy** `0.8.0.beta` — do NOT use Trix |
 | Images | Active Storage + libvips → AVIF/WebP |
 | Auth | Rails built-in authentication generator |
 | Deploy | Kamal 2 |
 
-**Hard rules:** No ERB partials for UI components — use Phlex. No ViewComponent. No Alpine/HTMX/React/Vue. No ActiveAdmin.
+**Hard rules:** ERB templates — no Phlex, no ViewComponent. No Alpine/HTMX/React/Vue. No ActiveAdmin.
 Use Tailwind utility classes — no custom CSS except for things Tailwind cannot express. Dark theme, orange accent (`orange-500`).
 Lexxy replaces Trix — `form.rich_text_area` renders Lexxy automatically. See `docs/design.md`.
 
 ---
 
-## Phlex Conventions
+## ERB Conventions
 
-- All UI components live in `app/views/components/` and inherit from `ApplicationComponent < Phlex::HTML`.
-- Page views live in `app/views/pages/` (e.g. `Essays::IndexView`), inheriting from `ApplicationView`.
-- Layouts are Phlex components in `app/views/layouts/`.
-- Controllers render Phlex views: `render EssaysIndexView.new(essays: @essays)`.
-- Shared markup → a Phlex component, not a partial. Logic → the component itself or a helper module.
-- Keep `#view_template` focused; extract sub-components when a component exceeds ~80 lines.
-- Use `@slots` / `renders_one` / `renders_many` for composable components.
+- Views in `app/views/<controller>/` follow standard Rails naming (`index.html.erb`, `show.html.erb`, etc.).
+- Shared partials live in `app/views/shared/` or alongside the primary resource (render with full path).
+- Reusable HTML within a resource: `_partial.html.erb` with `<%# locals: (var:) %>` declaration.
+- Logic that generates HTML → helpers (`app/helpers/`). Simple string logic → model/presenter.
+- Admin helpers (`admin_card`, `admin_toolbar`, `admin_error_list`, etc.) are in `AdminHelper`.
+- `badge(status)` helper in `ApplicationHelper` renders a status badge span.
+- Controllers set instance variables; views use them directly — no Phlex initializer pattern.
 
 ---
 

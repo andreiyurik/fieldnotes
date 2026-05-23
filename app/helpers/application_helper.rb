@@ -47,4 +47,24 @@ module ApplicationHelper
   def field_item_photo(item)
     item.watermarked_photo.attached? ? item.watermarked_photo : item.photo
   end
+
+  BADGE_VARIANTS = {
+    reading:   "bg-purple-bg text-purple-text",
+    completed: "bg-green-bg text-green-text",
+    abandoned: "bg-surface text-muted",
+    published: "bg-green-bg text-green-text",
+    draft:     "bg-amber-bg text-amber-text",
+    active:    "bg-green-bg text-green-text",
+    paused:    "bg-amber-bg text-amber-text",
+    archived:  "bg-surface text-muted",
+    photo:     "bg-blue-bg text-blue-text",
+    video:     "bg-purple-bg text-purple-text",
+    mixed:     "bg-amber-bg text-amber-text",
+  }.freeze
+
+  def badge(status)
+    base = "inline-block px-2.5 py-0.5 rounded-full text-[0.6875rem] font-bold tracking-wider uppercase"
+    variant = BADGE_VARIANTS.fetch(status.to_sym, "bg-surface text-muted")
+    content_tag(:span, status.to_s.capitalize, class: "#{base} #{variant}")
+  end
 end

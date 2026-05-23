@@ -1,0 +1,36 @@
+<% content_for :title, "Builds" %>
+
+<%= admin_toolbar(title: "Builds") do %>
+  <%= link_to "New Build", new_admin_build_path, class: btn_primary_class %>
+<% end %>
+
+<% if @builds.any? %>
+  <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+    <table class="w-full border-collapse">
+      <thead>
+        <tr>
+          <th class="<%= admin_table_th_class %>">Title</th>
+          <th class="<%= admin_table_th_class %>">Kind</th>
+          <th class="<%= admin_table_th_class %>">Status</th>
+          <th class="<%= admin_table_th_class %>"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @builds.each do |build| %>
+          <tr class="hover:bg-[#FAFAF9] transition">
+            <td class="<%= admin_table_td_class %>">
+              <%= link_to build.title, edit_admin_build_path(build), class: "text-accent hover:text-[#D4631E] font-medium" %>
+            </td>
+            <td class="<%= admin_table_td_class %> text-[#78716C]"><%= build.kind %></td>
+            <td class="<%= admin_table_td_class %>"><%= badge(build.status) %></td>
+            <td class="<%= admin_table_td_class %>"></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p class="text-center py-12 text-[#78716C] text-sm">
+    No builds yet. <%= link_to "Add your first one", new_admin_build_path, class: "text-accent" %>
+  </p>
+<% end %>

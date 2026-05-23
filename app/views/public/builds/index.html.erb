@@ -1,0 +1,16 @@
+<% content_for :title, "Builds" %>
+<% content_for :head do %>
+  <%= meta_tags(title: "Builds", description: "Projects, businesses, and things I've built.") %>
+<% end %>
+
+<%= render "public/builds/profile_hero", profile: @profile %>
+
+<h1 class="text-3xl font-bold tracking-tight mb-8">Builds</h1>
+
+<% if @builds.empty? %>
+  <p class="text-muted text-center py-16">No builds yet.</p>
+<% else %>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <%= render partial: "public/builds/card", collection: @builds, as: :build %>
+  </div>
+<% end %>
