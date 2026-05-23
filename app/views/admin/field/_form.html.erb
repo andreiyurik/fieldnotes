@@ -5,6 +5,15 @@
 <%= form_with model: [:admin, series], url: url do |f| %>
   <%= admin_card do %>
     <div class="mb-4">
+      <%= f.label :cover, class: admin_label_class %>
+      <%= f.file_field :cover, accept: "image/*", class: "text-sm text-[#57534E] cursor-pointer" %>
+      <% if series.cover.attached? %>
+        <div class="mt-2">
+          <%= image_tag series.cover.variant(:thumb), class: "w-40 h-30 object-cover rounded-md" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="mb-4">
       <%= f.label :title, class: admin_label_class %>
       <%= f.text_field :title, class: admin_input_class %>
     </div>

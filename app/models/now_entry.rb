@@ -6,4 +6,5 @@ class NowEntry < ApplicationRecord
   scope :previous, -> { order(published_at: :desc).offset(1) }
 
   def self.latest = order(published_at: :desc).first
+  def self.latest! = order(published_at: :desc).first!
 end

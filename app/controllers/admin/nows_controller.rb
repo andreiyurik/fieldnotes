@@ -18,6 +18,6 @@ class Admin::NowsController < Admin::BaseController
   private
 
   def now_entry_params
-    params.require(:now_entry).permit(:body)
+    params.require(:now_entry).permit(:body, :location)
   end
 end

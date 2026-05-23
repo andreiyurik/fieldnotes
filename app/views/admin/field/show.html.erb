@@ -25,6 +25,9 @@
           <p class="text-xs text-[#78716C] mt-1"><%= item.youtube_url %></p>
         <% end %>
         <p class="text-xs text-[#78716C] mt-1">Position: <%= item.position %></p>
+        <% if item.camera_model.present? %>
+          <p class="text-xs text-[#78716C] mt-1"><%= "#{item.camera_make} #{item.camera_model}".strip %> · <%= item.aperture %> · ISO <%= item.iso %></p>
+        <% end %>
       </div>
     </div>
     <div class="flex-shrink-0">

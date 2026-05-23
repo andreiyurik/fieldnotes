@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :field do
       resources :field_items, only: [:create, :destroy, :update]
     end
+    resource :quick, only: [:new, :create]
     resource :profile, only: [:edit, :update]
     resource :now, only: [:edit, :update]
     resource :settings, only: [:edit, :update] do

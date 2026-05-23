@@ -11,6 +11,9 @@
     <time datetime="<%= @current.published_at.iso8601 %>">
       Updated <%= @current.published_at.strftime("%B %d, %Y") %>
     </time>
+    <% if @current.location.present? %>
+      <span class="ml-2">📍 <%= @current.location %></span>
+    <% end %>
   </p>
 <% end %>
 

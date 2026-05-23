@@ -29,6 +29,11 @@ class Essay < ApplicationRecord
     status == "draft"
   end
 
+  def reading_time
+    words = content.to_plain_text.split.size
+    (words / 200.0).ceil.clamp(1, 60)
+  end
+
   private
 
   def set_published_at

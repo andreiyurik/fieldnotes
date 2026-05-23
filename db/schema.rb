@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_09_082155) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_24_100001) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -100,11 +100,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_09_082155) do
   end
 
   create_table "field_items", force: :cascade do |t|
+    t.string "aperture"
+    t.string "camera_make"
+    t.string "camera_model"
     t.text "caption"
     t.datetime "created_at", null: false
     t.integer "field_series_id", null: false
+    t.string "focal_length"
+    t.decimal "gps_latitude", precision: 10, scale: 7
+    t.decimal "gps_longitude", precision: 10, scale: 7
+    t.integer "iso"
     t.string "kind"
+    t.string "lens"
     t.integer "position"
+    t.string "shutter_speed"
+    t.datetime "taken_at"
     t.datetime "updated_at", null: false
     t.string "youtube_url"
     t.index ["field_series_id"], name: "index_field_items_on_field_series_id"
@@ -126,6 +136,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_09_082155) do
 
   create_table "now_entries", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.string "location"
     t.datetime "published_at"
     t.datetime "updated_at", null: false
   end

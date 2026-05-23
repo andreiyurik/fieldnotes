@@ -10,6 +10,10 @@
       <%= f.rich_text_area :body %>
       <p class="<%= admin_hint_class %>">Each update creates a new entry. Previous versions are kept as history.</p>
     </div>
+    <div class="mb-4">
+      <%= f.label :location, class: admin_label_class %>
+      <%= f.text_field :location, placeholder: "e.g. Bali, Indonesia", class: admin_input_class %>
+    </div>
     <%= f.submit "Update", class: btn_primary_class %>
   <% end %>
 <% end %>
@@ -18,7 +22,12 @@
   <h2 class="text-lg font-semibold mb-3 text-[#1C1917]">Previous entries</h2>
   <% @previous_entries.each do |entry| %>
     <div class="bg-white rounded-xl shadow-sm px-4 py-3 mb-2">
-      <p class="text-xs text-[#78716C]"><%= entry.published_at.strftime("%b %d, %Y at %H:%M") %></p>
+      <p class="text-xs text-[#78716C]">
+        <%= entry.published_at.strftime("%b %d, %Y at %H:%M") %>
+        <% if entry.location.present? %>
+          · 📍 <%= entry.location %>
+        <% end %>
+      </p>
     </div>
   <% end %>
 <% end %>

@@ -17,6 +17,8 @@
       <%= link_to "Books",    admin_books_path,        class: admin_nav_class("books"),    aria: { current: (controller_name == "books"   ? "page" : nil) } %>
       <%= link_to "Field",    admin_field_index_path,  class: admin_nav_class("field"),    aria: { current: (controller_name.in?(%w[field field_items]) ? "page" : nil) } %>
       <span class="flex-1"></span>
+      <%= link_to "⚡ Quick", new_admin_quick_path,
+          class: "sm:hidden bg-accent text-white px-3 py-1.5 rounded-md text-sm font-medium no-underline" %>
       <%= link_to "Now",      edit_admin_now_path,      class: admin_nav_class("nows"),     aria: { current: (controller_name == "nows"     ? "page" : nil) } %>
       <%= link_to "Profile",  edit_admin_profile_path, class: admin_nav_class("profiles"), aria: { current: (controller_name == "profiles" ? "page" : nil) } %>
       <%= link_to "Settings", edit_admin_settings_path, class: admin_nav_class("settings"), aria: { current: (controller_name == "settings" ? "page" : nil) } %>

@@ -5,7 +5,9 @@ class Admin::FieldItemsController < Admin::BaseController
   def create
     @item = @series.field_items.new(field_item_params)
     if @item.save
-      ImageVariantJob.perform_later(@item, watermark: true) if @item.photo.attached?
+      if @item.photo.attached?
+        ImageVariantJob.perform_later(@item, watermark: true)
+      end
       redirect_to admin_field_url(@series), notice: "Item added"
     else
       redirect_to admin_field_url(@series), alert: "Failed to add item"

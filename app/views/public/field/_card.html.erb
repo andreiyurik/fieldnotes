@@ -1,9 +1,13 @@
 <%# locals: (series:) %>
-<% cover_item = series.field_items.find { |item| item.photo.attached? } %>
+<% cover_photo = if series.cover.attached?
+                   series.cover
+                 else
+                   series.field_items.find { |item| item.photo.attached? }&.photo
+                 end %>
 <article class="bg-surface border border-border rounded-lg overflow-hidden relative cursor-pointer transition hover:-translate-y-0.5 hover:shadow-md">
-  <% if cover_item %>
+  <% if cover_photo %>
     <div class="w-full aspect-video overflow-hidden">
-      <%= picture_tag(cover_item.photo, alt: series.title, sizes: "(max-width: 768px) 100vw, 50vw") %>
+      <%= picture_tag(cover_photo, alt: series.title, sizes: "(max-width: 768px) 100vw, 50vw") %>
     </div>
   <% end %>
 

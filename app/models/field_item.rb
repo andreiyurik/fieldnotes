@@ -21,4 +21,6 @@ class FieldItem < ApplicationRecord
   validates :youtube_url, presence: true, if: -> { kind == "video" }
 
   scope :ordered, -> { order(position: :asc) }
+
+  after_create_commit -> { ExtractExifJob.perform_later(id) }, if: -> { photo.attached? }
 end
