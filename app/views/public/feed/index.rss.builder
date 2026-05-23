@@ -6,23 +6,25 @@ xml.rss version: "2.0" do
     xml.description "Essays, builds, and field notes"
     xml.language "en"
 
-    @essays.each do |essay|
-      xml.item do
-        xml.title essay.title
-        xml.link essay_url(slug: essay.slug)
-        xml.description essay.content.to_s
-        xml.pubDate essay.published_at.to_fs(:rfc822)
-        xml.guid essay_url(slug: essay.slug)
-      end
-    end
+    feed_items = @essays.map { |e| [e, e.published_at] } +
+                 @series.map { |s| [s, s.created_at] }
 
-    @series.each do |series|
+    feed_items.sort_by { |_, date| date }.reverse_each do |item, _|
       xml.item do
-        xml.title series.title
-        xml.link field_url(slug: series.slug)
-        xml.description series.description.to_s
-        xml.pubDate series.created_at.to_fs(:rfc822)
-        xml.guid field_url(slug: series.slug)
+        case item
+        when Essay
+          xml.title item.title
+          xml.link essay_url(slug: item.slug)
+          xml.description item.content.to_s
+          xml.pubDate item.published_at.to_fs(:rfc822)
+          xml.guid essay_url(slug: item.slug)
+        when FieldSeries
+          xml.title item.title
+          xml.link field_url(slug: item.slug)
+          xml.description item.description.to_s
+          xml.pubDate item.created_at.to_fs(:rfc822)
+          xml.guid field_url(slug: item.slug)
+        end
       end
     end
   end

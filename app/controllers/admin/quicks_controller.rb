@@ -25,6 +25,6 @@ class Admin::QuicksController < Admin::BaseController
   end
 
   def photos_params
-    params.dig(:field_series, :photos) || []
+    Array(params.require(:field_series).permit(photos: [])[:photos])
   end
 end

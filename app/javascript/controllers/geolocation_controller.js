@@ -8,6 +8,4 @@ export default class extends Controller {
       this.fieldTarget.value = `${coords.latitude.toFixed(4)}, ${coords.longitude.toFixed(4)}`
     })
   }
-
-  fill() {}
 }

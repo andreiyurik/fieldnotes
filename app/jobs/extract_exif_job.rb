@@ -6,7 +6,7 @@ class ExtractExifJob < ApplicationJob
     return unless item.photo.attached?
 
     item.photo.open do |file|
-      data = JSON.parse(`exiftool -j -n "#{file.path}"`)&.first
+      data = JSON.parse(IO.popen(["exiftool", "-j", "-n", file.path], &:read))&.first
       next unless data
 
       item.update!(
