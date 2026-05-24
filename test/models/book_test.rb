@@ -50,8 +50,8 @@ class BookTest < ActiveSupport::TestCase
   test "fetches metadata from ISBN on create" do
     fake_data = { title: "Refactoring", author: "Martin Fowler", cover_url: "https://covers.openlibrary.org/b/isbn/9780134757599-L.jpg" }
 
-    original = OpenLibraryService.method(:fetch)
-    OpenLibraryService.define_singleton_method(:fetch) { |isbn:, **| fake_data }
+    original = Book.method(:lookup_isbn)
+    Book.define_singleton_method(:lookup_isbn) { |isbn, **| fake_data }
 
     book = Book.new(isbn: "9780134757599", status: "reading")
     book.valid?
@@ -59,7 +59,7 @@ class BookTest < ActiveSupport::TestCase
     assert_equal "Refactoring", book.title
     assert_equal "Martin Fowler", book.author
   ensure
-    OpenLibraryService.define_singleton_method(:fetch, original)
+    Book.define_singleton_method(:lookup_isbn, original)
   end
 
   test "does not overwrite existing title with ISBN fetch" do
@@ -72,8 +72,7 @@ class BookTest < ActiveSupport::TestCase
 
   test "handles nil from API gracefully" do
     book = Book.new(isbn: "0000000000", title: "Manual Entry", author: "Someone", status: "reading")
-    # OpenLibraryService.fetch returns nil for unknown ISBNs (cached or API failure)
-    # Book should still be valid with manually provided title/author
+    # Book.lookup_isbn returns nil for unknown ISBNs — manual fields are preserved
     assert book.valid?
     assert_equal "Manual Entry", book.title
   end

@@ -4,7 +4,7 @@ module ApplicationHelper
   NAV_LINK_ACTIVE = "text-ink after:absolute after:bottom-[3px] after:left-3 after:right-3 " \
                     "after:h-0.5 after:bg-accent after:rounded-sm after:content-['']"
 
-  ADMIN_NAV_LINK_BASE   = "text-[#A8A29E] text-sm px-2.5 py-1.5 rounded-md transition hover:text-white hover:bg-white/10 no-underline"
+  ADMIN_NAV_LINK_BASE   = "text-stone-400 text-sm px-2.5 py-1.5 rounded-md transition hover:text-white hover:bg-white/10 no-underline"
   ADMIN_NAV_LINK_ACTIVE = "text-white bg-white/10"
 
   def admin_nav_class(cn)

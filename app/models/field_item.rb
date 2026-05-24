@@ -15,7 +15,6 @@ class FieldItem < ApplicationRecord
     attachable.variant :retina, resize_to_limit: [2560, 1920], format: :avif, saver: { quality: 85 }
   end
 
-
   validates :kind,     inclusion: { in: KINDS }
   validates :position, presence: true
   validates :youtube_url, presence: true, if: -> { kind == "video" }
@@ -23,4 +22,8 @@ class FieldItem < ApplicationRecord
   scope :ordered, -> { order(position: :asc) }
 
   after_create_commit -> { ExtractExifJob.perform_later(id) }, if: -> { photo.attached? }
+
+  def youtube_video_id
+    youtube_url&.match(/(?:v=|youtu\.be\/)([^&?\s]+)/)&.captures&.first
+  end
 end

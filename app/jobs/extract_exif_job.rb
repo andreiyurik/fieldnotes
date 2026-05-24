@@ -6,7 +6,7 @@ class ExtractExifJob < ApplicationJob
     return unless item.photo.attached?
 
     item.photo.open do |file|
-      data = JSON.parse(IO.popen(["exiftool", "-j", "-n", file.path], &:read))&.first
+      data = read_exif(file.path)
       next unless data
 
       item.update!(
@@ -33,9 +33,15 @@ class ExtractExifJob < ApplicationJob
 
   private
 
+  def read_exif(path)
+    JSON.parse(IO.popen(["exiftool", "-j", "-n", path], &:read))&.first
+  rescue => e
+    Rails.logger.error("ExtractExifJob EXIF read failed: #{e.message}")
+    nil
+  end
+
   def parse_exif_date(value)
     return unless value
-
     Time.strptime(value, "%Y:%m:%d %H:%M:%S")
   rescue ArgumentError
     nil

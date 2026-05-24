@@ -3,9 +3,9 @@
 <%= admin_toolbar(title: "Edit Series") %>
 <%= render "form", series: @series %>
 
-<hr class="border-none border-t border-[#E8E3DC] my-8">
+<hr class="border-none border-t border-stone-200 my-8">
 <div class="flex items-center gap-4">
-  <p class="text-xs text-[#78716C] m-0">Danger Zone</p>
+  <p class="text-xs text-stone-500 m-0">Danger Zone</p>
   <%= button_to "Delete Series", admin_field_path(@series), method: :delete,
         class: btn_danger_class,
         form: { data: { turbo_confirm: "Delete «#{@series.title}»?" } } %>

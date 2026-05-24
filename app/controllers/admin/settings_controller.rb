@@ -2,7 +2,6 @@ class Admin::SettingsController < Admin::BaseController
   before_action :set_setting
 
   def edit
-
   end
 
   def update
@@ -11,16 +10,6 @@ class Admin::SettingsController < Admin::BaseController
     else
       render :edit, status: :unprocessable_entity
     end
-  end
-
-  def regenerate_watermarks
-    count = 0
-    FieldItem.includes(:photo_attachment).find_each do |item|
-      next unless item.photo.attached?
-      ImageVariantJob.perform_later(item, watermark: true)
-      count += 1
-    end
-    redirect_to edit_admin_settings_path, notice: "Queued watermark regeneration for #{count} photo(s)"
   end
 
   private

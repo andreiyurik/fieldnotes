@@ -16,7 +16,7 @@ class Admin::FieldItemsController < Admin::BaseController
 
   def update
     if @item.update(field_item_params)
-      ImageVariantJob.perform_later(@item, watermark: true) if @item.photo.attached?
+      ImageVariantJob.perform_later(@item, watermark: true) if field_item_params[:photo].present?
       redirect_to admin_field_url(@series), notice: "Item updated"
     else
       redirect_to admin_field_url(@series), alert: "Failed to update item"

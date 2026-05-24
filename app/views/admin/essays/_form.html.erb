@@ -22,7 +22,7 @@
     </div>
     <div class="mb-4 last:mb-0">
       <%= f.label :cover, class: admin_label_class %>
-      <%= f.file_field :cover, class: "text-sm text-[#57534E] cursor-pointer" %>
+      <%= f.file_field :cover, class: "text-sm text-stone-600 cursor-pointer" %>
     </div>
   <% end %>
 
@@ -35,7 +35,7 @@
       <%= f.submit "Save", class: btn_primary_class %>
     <% else %>
       <%= f.submit "Save Draft", class: btn_secondary_class %>
-      <%= f.submit "Publish", class: btn_primary_class %>
+      <%= f.submit "Publish", name: "publish", class: btn_primary_class %>
     <% end %>
   </div>
 <% end %>

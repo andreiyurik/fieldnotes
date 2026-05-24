@@ -27,8 +27,9 @@ Rails.application.routes.draw do
     resource :quick, only: [:new, :create]
     resource :profile, only: [:edit, :update]
     resource :now, only: [:edit, :update]
-    resource :settings, only: [:edit, :update] do
-      post :regenerate_watermarks, on: :member
+    resource :settings, only: [:edit, :update]
+    namespace :settings do
+      resource :watermark_regeneration, only: :create
     end
   end
 

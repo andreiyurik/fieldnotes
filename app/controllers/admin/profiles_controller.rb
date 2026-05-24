@@ -1,7 +1,6 @@
 class Admin::ProfilesController < Admin::BaseController
   def edit
     @profile = Profile.instance
-
   end
 
   def update

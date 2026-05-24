@@ -1,7 +1,7 @@
 require "test_helper"
 require "net/http"
 
-class OpenLibraryServiceTest < ActiveSupport::TestCase
+class BookLookupTest < ActiveSupport::TestCase
   VALID_ISBN   = "9780134757599"
   UNKNOWN_ISBN = "0000000000"
 
@@ -9,8 +9,8 @@ class OpenLibraryServiceTest < ActiveSupport::TestCase
     Rails.cache.clear
   end
 
-  test "fetch returns hash with title, author, cover_url, year" do
-    result = OpenLibraryService.fetch(isbn: VALID_ISBN, http: fake_http(VALID_ISBN))
+  test "lookup_isbn returns hash with title, author, cover_url, year" do
+    result = Book.lookup_isbn(VALID_ISBN, http: fake_http(VALID_ISBN))
 
     assert_not_nil result
     assert_equal "Refactoring", result[:title]
@@ -20,7 +20,7 @@ class OpenLibraryServiceTest < ActiveSupport::TestCase
   end
 
   test "returns nil on API failure" do
-    result = OpenLibraryService.fetch(isbn: UNKNOWN_ISBN, http: failing_http)
+    result = Book.lookup_isbn(UNKNOWN_ISBN, http: failing_http)
     assert_nil result
   end
 
@@ -29,8 +29,8 @@ class OpenLibraryServiceTest < ActiveSupport::TestCase
     counting_http = fake_http(VALID_ISBN, on_call: -> { call_count += 1 })
 
     with_memory_cache do
-      OpenLibraryService.fetch(isbn: VALID_ISBN, http: counting_http)
-      OpenLibraryService.fetch(isbn: VALID_ISBN, http: counting_http)
+      Book.lookup_isbn(VALID_ISBN, http: counting_http)
+      Book.lookup_isbn(VALID_ISBN, http: counting_http)
     end
 
     assert_equal 1, call_count

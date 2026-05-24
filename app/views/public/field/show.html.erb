@@ -41,8 +41,7 @@
           ) %>
         </div>
       <% elsif item.youtube_url.present? %>
-        <% video_id = item.youtube_url.match(/(?:v=|youtu\.be\/)([^&?\s]+)/)&.captures&.first %>
-        <% if video_id %>
+        <% if (video_id = item.youtube_video_id) %>
           <div class="rounded-lg overflow-hidden aspect-video">
             <iframe src="https://www.youtube-nocookie.com/embed/<%= video_id %>"
                     title="<%= item.caption.presence || @series.title %>"

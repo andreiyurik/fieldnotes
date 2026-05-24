@@ -18,11 +18,11 @@
       </thead>
       <tbody>
         <% @books.each do |book| %>
-          <tr class="hover:bg-[#FAFAF9] transition">
+          <tr class="hover:bg-stone-50 transition">
             <td class="<%= admin_table_td_class %>">
               <%= link_to book.title, edit_admin_book_path(book), class: "text-accent hover:text-[#D4631E] font-medium" %>
             </td>
-            <td class="<%= admin_table_td_class %> text-[#78716C]"><%= book.author %></td>
+            <td class="<%= admin_table_td_class %> text-stone-500"><%= book.author %></td>
             <td class="<%= admin_table_td_class %>"><%= badge(book.status) %></td>
             <td class="<%= admin_table_td_class %>"><%= book.rating ? "★" * book.rating : "—" %></td>
             <td class="<%= admin_table_td_class %>"></td>
@@ -32,7 +32,7 @@
     </table>
   </div>
 <% else %>
-  <p class="text-center py-12 text-[#78716C] text-sm">
+  <p class="text-center py-12 text-stone-500 text-sm">
     No books yet. <%= link_to "Add your first one", new_admin_book_path, class: "text-accent" %>
   </p>
 <% end %>

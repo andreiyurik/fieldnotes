@@ -3,12 +3,10 @@ class Admin::EssaysController < Admin::BaseController
 
   def index
     @essays = Essay.includes(:cover_attachment).order(created_at: :desc)
-
   end
 
   def new
     @essay = Essay.new
-
   end
 
   def create
@@ -22,7 +20,6 @@ class Admin::EssaysController < Admin::BaseController
   end
 
   def edit
-
   end
 
   def update
@@ -52,7 +49,7 @@ class Admin::EssaysController < Admin::BaseController
   end
 
   def apply_publish_intent(essay)
-    return unless params[:commit] == "Publish"
+    return unless params[:publish]
     essay.status = "published"
     essay.published_at ||= Time.current
   end

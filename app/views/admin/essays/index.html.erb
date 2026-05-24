@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <% @essays.each do |essay| %>
-          <tr class="hover:bg-[#FAFAF9] transition">
+          <tr class="hover:bg-stone-50 transition">
             <td class="<%= admin_table_td_class %>">
               <% if essay.cover.attached? %>
                 <%= image_tag essay.cover, class: "w-10 h-10 object-cover rounded block" %>
@@ -32,7 +32,7 @@
             <td class="<%= admin_table_td_class %> text-right">
               <% if essay.published? %>
                 <%= link_to "View", essay_path(essay.slug), target: "_blank",
-                      class: "text-sm text-[#57534E] hover:text-[#1C1917] px-2 py-1 rounded hover:bg-[#F0EDE8] transition" %>
+                      class: "text-sm text-stone-600 hover:text-stone-900 px-2 py-1 rounded hover:bg-stone-100 transition" %>
               <% end %>
             </td>
           </tr>
@@ -41,7 +41,7 @@
     </table>
   </div>
 <% else %>
-  <p class="text-center py-12 text-[#78716C] text-sm">
+  <p class="text-center py-12 text-stone-500 text-sm">
     No essays yet. <%= link_to "Write your first one", new_admin_essay_path, class: "text-accent" %>
   </p>
 <% end %>

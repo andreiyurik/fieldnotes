@@ -3,12 +3,10 @@ class Admin::BooksController < Admin::BaseController
 
   def index
     @books = Book.by_year
-
   end
 
   def new
     @book = Book.new
-
   end
 
   def create
@@ -21,7 +19,6 @@ class Admin::BooksController < Admin::BaseController
   end
 
   def edit
-
   end
 
   def update

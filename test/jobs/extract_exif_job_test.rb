@@ -5,13 +5,13 @@ class ExtractExifJobTest < ActiveSupport::TestCase
     item = field_items(:photo_one)
     item.photo.attach(io: File.open(file_fixture("test.jpg")), filename: "test.jpg", content_type: "image/jpeg")
 
-    exif_output = [{ "Make" => "Sony", "Model" => "A7III", "LensModel" => "24-70mm f/2.8",
-                     "FocalLength" => 35.0, "FNumber" => 2.8, "ExposureTime" => 0.008,
-                     "ISO" => 400, "DateTimeOriginal" => "2026:03:15 10:30:00",
-                     "GPSLatitude" => 64.1466, "GPSLongitude" => -21.9426 }].to_json
+    exif_data = { "Make" => "Sony", "Model" => "A7III", "LensModel" => "24-70mm f/2.8",
+                  "FocalLength" => 35.0, "FNumber" => 2.8, "ExposureTime" => 0.008,
+                  "ISO" => 400, "DateTimeOriginal" => "2026:03:15 10:30:00",
+                  "GPSLatitude" => 64.1466, "GPSLongitude" => -21.9426 }
 
     job = ExtractExifJob.new
-    job.define_singleton_method(:`) { |_cmd| exif_output }
+    job.define_singleton_method(:read_exif) { |_path| exif_data }
     job.perform(item.id)
 
     item.reload
@@ -33,10 +33,10 @@ class ExtractExifJobTest < ActiveSupport::TestCase
     item = series.field_items.find_by(position: 1)
     item.photo.attach(io: File.open(file_fixture("test.jpg")), filename: "test.jpg", content_type: "image/jpeg")
 
-    exif_output = [{ "GPSLatitude" => 64.1466, "GPSLongitude" => -21.9426 }].to_json
+    exif_data = { "GPSLatitude" => 64.1466, "GPSLongitude" => -21.9426 }
 
     job = ExtractExifJob.new
-    job.define_singleton_method(:`) { |_cmd| exif_output }
+    job.define_singleton_method(:read_exif) { |_path| exif_data }
     job.perform(item.id)
 
     series.reload

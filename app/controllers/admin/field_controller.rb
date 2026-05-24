@@ -3,16 +3,13 @@ class Admin::FieldController < Admin::BaseController
 
   def index
     @series = FieldSeries.includes(field_items: :photo_attachment).order(created_at: :desc)
-
   end
 
   def show
-
   end
 
   def new
     @series = FieldSeries.new
-
   end
 
   def create

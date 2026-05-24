@@ -15,7 +15,7 @@
     </div>
     <div class="mb-0">
       <%= f.label :avatar, "Avatar", class: admin_label_class %>
-      <%= f.file_field :avatar, accept: "image/*", class: "text-sm text-[#57534E] cursor-pointer" %>
+      <%= f.file_field :avatar, accept: "image/*", class: "text-sm text-stone-600 cursor-pointer" %>
       <% if @profile.avatar.attached? %>
         <p class="<%= admin_hint_class %>">Current: <%= @profile.avatar.filename %> — upload a new file to replace</p>
         <%= image_tag @profile.avatar, alt: "Avatar", class: "w-20 h-20 rounded-full object-cover mt-2" %>

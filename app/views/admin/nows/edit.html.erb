@@ -19,10 +19,10 @@
 <% end %>
 
 <% if @previous_entries.any? %>
-  <h2 class="text-lg font-semibold mb-3 text-[#1C1917]">Previous entries</h2>
+  <h2 class="text-lg font-semibold mb-3 text-stone-900">Previous entries</h2>
   <% @previous_entries.each do |entry| %>
     <div class="bg-white rounded-xl shadow-sm px-4 py-3 mb-2">
-      <p class="text-xs text-[#78716C]">
+      <p class="text-xs text-stone-500">
         <%= entry.published_at.strftime("%b %d, %Y at %H:%M") %>
         <% if entry.location.present? %>
           · 📍 <%= entry.location %>

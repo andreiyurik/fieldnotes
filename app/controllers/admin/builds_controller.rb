@@ -3,12 +3,10 @@ class Admin::BuildsController < Admin::BaseController
 
   def index
     @builds = Build.ordered
-
   end
 
   def new
     @build = Build.new
-
   end
 
   def create
