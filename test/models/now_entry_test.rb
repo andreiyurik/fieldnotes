@@ -25,4 +25,14 @@ class NowEntryTest < ActiveSupport::TestCase
     assert_not_includes result, now_entries(:current)
     assert result.all? { it.published_at < now_entries(:current).published_at }
   end
+
+  test "location is optional" do
+    entry = NowEntry.new(published_at: Time.current, location: nil)
+    assert entry.valid?
+  end
+
+  test "stores location" do
+    entry = now_entries(:current)
+    assert_equal "Bali, Indonesia", entry.location
+  end
 end

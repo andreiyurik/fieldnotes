@@ -1,0 +1,50 @@
+<% content_for :title, @book.title %>
+<% content_for :head do %>
+  <%= meta_tags(
+    title:       "#{@book.title} — #{@book.author}",
+    description: @book.key_idea.to_s.truncate(160),
+    image:       @book.cover_image_url
+  ) %>
+<% end %>
+
+<div class="flex gap-10 items-start flex-col sm:flex-row">
+  <div class="flex-shrink-0 w-40">
+    <% if @book.cover_image_url.present? %>
+      <img src="<%= @book.cover_image_url %>" alt="<%= @book.title %>" class="w-full rounded-lg shadow-md">
+    <% else %>
+      <%= render "public/books/placeholder", title: @book.title %>
+    <% end %>
+  </div>
+
+  <div class="flex-1 min-w-0">
+    <header class="mb-6">
+      <h1 class="text-3xl font-bold mb-1"><%= @book.title %></h1>
+      <p class="text-muted text-lg mb-3"><%= @book.author %></p>
+      <div class="flex items-center gap-3 flex-wrap">
+        <% if @book.rating %>
+          <span class="text-accent tracking-widest"><%= "★" * @book.rating %></span>
+        <% end %>
+        <%= badge(@book.status) %>
+        <% if @book.year_read %>
+          <span class="text-muted text-sm">Read in <%= @book.year_read %></span>
+        <% end %>
+      </div>
+    </header>
+
+    <% if @book.key_idea.present? %>
+      <section class="mb-6">
+        <h2 class="text-xl font-semibold mb-2">Key idea</h2>
+        <p class="text-muted leading-relaxed"><%= @book.key_idea %></p>
+      </section>
+    <% end %>
+
+    <% if @book.review.present? %>
+      <section class="mb-6">
+        <h2 class="text-xl font-semibold mb-2">Notes & review</h2>
+        <div class="lexxy-content"><%= @book.review %></div>
+      </section>
+    <% end %>
+
+    <p><%= link_to "← Back to reading list", books_path, class: "text-muted hover:text-accent transition" %></p>
+  </div>
+</div>

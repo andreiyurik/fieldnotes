@@ -4,7 +4,6 @@ class Public::EssaysController < Public::BaseController
   def index
     @essays = Essay.published.includes(:cover_attachment)
     fresh_when @essays
-    render Views::Public::Essays::IndexView.new(essays: @essays)
   end
 
   def show
@@ -15,7 +14,7 @@ class Public::EssaysController < Public::BaseController
     return unless stale?(@essay)
 
     respond_to do |format|
-      format.html { render Views::Public::Essays::ShowView.new(essay: @essay) }
+      format.html
       format.rss
       format.md
     end

@@ -4,17 +4,17 @@ module ApplicationHelper
   NAV_LINK_ACTIVE = "text-ink after:absolute after:bottom-[3px] after:left-3 after:right-3 " \
                     "after:h-0.5 after:bg-accent after:rounded-sm after:content-['']"
 
-  ADMIN_NAV_LINK_BASE   = "text-[#A8A29E] text-sm px-2.5 py-1.5 rounded-md transition hover:text-white hover:bg-white/10 no-underline"
+  ADMIN_NAV_LINK_BASE   = "text-stone-400 text-sm px-2.5 py-1.5 rounded-md transition hover:text-white hover:bg-white/10 no-underline"
   ADMIN_NAV_LINK_ACTIVE = "text-white bg-white/10"
 
   def admin_nav_class(cn)
     active = controller_name == cn
-    [ADMIN_NAV_LINK_BASE, active ? ADMIN_NAV_LINK_ACTIVE : nil].compact.join(" ")
+    [ ADMIN_NAV_LINK_BASE, active ? ADMIN_NAV_LINK_ACTIVE : nil ].compact.join(" ")
   end
 
   def nav_link_class(controller_name_suffix)
     active = controller_path.end_with?(controller_name_suffix)
-    [NAV_LINK_BASE, active ? NAV_LINK_ACTIVE : nil].compact.join(" ")
+    [ NAV_LINK_BASE, active ? NAV_LINK_ACTIVE : nil ].compact.join(" ")
   end
 
   def meta_tags(title:, description:, image: nil, type: :website, published_at: nil)
@@ -46,5 +46,25 @@ module ApplicationHelper
   # Returns watermarked photo if available, otherwise original photo.
   def field_item_photo(item)
     item.watermarked_photo.attached? ? item.watermarked_photo : item.photo
+  end
+
+  BADGE_VARIANTS = {
+    reading:   "bg-purple-bg text-purple-text",
+    completed: "bg-green-bg text-green-text",
+    abandoned: "bg-surface text-muted",
+    published: "bg-green-bg text-green-text",
+    draft:     "bg-amber-bg text-amber-text",
+    active:    "bg-green-bg text-green-text",
+    paused:    "bg-amber-bg text-amber-text",
+    archived:  "bg-surface text-muted",
+    photo:     "bg-blue-bg text-blue-text",
+    video:     "bg-purple-bg text-purple-text",
+    mixed:     "bg-amber-bg text-amber-text"
+  }.freeze
+
+  def badge(status)
+    base = "inline-block px-2.5 py-0.5 rounded-full text-[0.6875rem] font-bold tracking-wider uppercase"
+    variant = BADGE_VARIANTS.fetch(status.to_sym, "bg-surface text-muted")
+    content_tag(:span, status.to_s.capitalize, class: "#{base} #{variant}")
   end
 end

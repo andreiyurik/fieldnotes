@@ -1,0 +1,27 @@
+<% content_for :title, "Profile" %>
+
+<%= admin_toolbar(title: "Profile") %>
+<%= admin_error_list(@profile) %>
+
+<%= form_with model: @profile, url: admin_profile_path, method: :patch do |f| %>
+  <%= admin_card do %>
+    <div class="mb-4">
+      <%= f.label :name, class: admin_label_class %>
+      <%= f.text_field :name, class: admin_input_class %>
+    </div>
+    <div class="mb-4">
+      <%= f.label :bio, "Bio", class: admin_label_class %>
+      <%= f.rich_text_area :bio %>
+    </div>
+    <div class="mb-0">
+      <%= f.label :avatar, "Avatar", class: admin_label_class %>
+      <%= f.file_field :avatar, accept: "image/*", class: "text-sm text-stone-600 cursor-pointer" %>
+      <% if @profile.avatar.attached? %>
+        <p class="<%= admin_hint_class %>">Current: <%= @profile.avatar.filename %> — upload a new file to replace</p>
+        <%= image_tag @profile.avatar, alt: "Avatar", class: "w-20 h-20 rounded-full object-cover mt-2" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= f.submit "Save", class: btn_primary_class %>
+<% end %>

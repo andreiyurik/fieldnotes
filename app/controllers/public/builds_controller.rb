@@ -5,6 +5,5 @@ class Public::BuildsController < Public::BaseController
     @builds  = Build.active.ordered
     @profile = Profile.instance
     fresh_when @builds
-    render Views::Public::Builds::IndexView.new(builds: @builds, profile: @profile)
   end
 end

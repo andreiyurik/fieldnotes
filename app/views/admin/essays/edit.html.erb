@@ -1,0 +1,12 @@
+<% content_for :title, "Edit Essay" %>
+
+<%= admin_toolbar(title: "Edit Essay") %>
+<%= render "form", essay: @essay %>
+
+<hr class="border-none border-t border-stone-200 my-8">
+<div class="flex items-center gap-4">
+  <p class="text-xs text-stone-500 m-0">Danger Zone</p>
+  <%= button_to "Delete Essay", admin_essay_path(@essay), method: :delete,
+        class: btn_danger_class,
+        form: { data: { turbo_confirm: "Delete «#{@essay.title}»?" } } %>
+</div>

@@ -34,4 +34,9 @@ class FieldSeriesTest < ActiveSupport::TestCase
     second = FieldSeries.create!(title: "Mountains", kind: "video")
     assert_equal "mountains-2", second.slug
   end
+
+  test "has cover attachment" do
+    series = field_series(:iceland)
+    assert_respond_to series, :cover
+  end
 end

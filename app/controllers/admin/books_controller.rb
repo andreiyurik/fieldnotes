@@ -1,14 +1,12 @@
 class Admin::BooksController < Admin::BaseController
-  before_action :set_book, only: [:edit, :update, :destroy]
+  before_action :set_book, only: [ :edit, :update, :destroy ]
 
   def index
     @books = Book.by_year
-    render Views::Admin::Books::IndexView.new(books: @books)
   end
 
   def new
     @book = Book.new
-    render Views::Admin::Books::NewView.new(book: @book)
   end
 
   def create
@@ -16,19 +14,18 @@ class Admin::BooksController < Admin::BaseController
     if @book.save
       redirect_to edit_admin_book_url(@book), notice: "Book created"
     else
-      render Views::Admin::Books::NewView.new(book: @book), status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
   def edit
-    render Views::Admin::Books::EditView.new(book: @book)
   end
 
   def update
     if @book.update(book_params)
       redirect_to edit_admin_book_url(@book), notice: "Book updated"
     else
-      render Views::Admin::Books::EditView.new(book: @book), status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 

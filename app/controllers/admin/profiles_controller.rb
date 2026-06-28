@@ -1,7 +1,6 @@
 class Admin::ProfilesController < Admin::BaseController
   def edit
     @profile = Profile.instance
-    render Views::Admin::Profiles::EditView.new(profile: @profile)
   end
 
   def update
@@ -9,7 +8,7 @@ class Admin::ProfilesController < Admin::BaseController
     if @profile.update(profile_params)
       redirect_to edit_admin_profile_path, notice: "Profile updated"
     else
-      render Views::Admin::Profiles::EditView.new(profile: @profile), status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
