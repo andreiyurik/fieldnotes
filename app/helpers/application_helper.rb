@@ -9,12 +9,12 @@ module ApplicationHelper
 
   def admin_nav_class(cn)
     active = controller_name == cn
-    [ADMIN_NAV_LINK_BASE, active ? ADMIN_NAV_LINK_ACTIVE : nil].compact.join(" ")
+    [ ADMIN_NAV_LINK_BASE, active ? ADMIN_NAV_LINK_ACTIVE : nil ].compact.join(" ")
   end
 
   def nav_link_class(controller_name_suffix)
     active = controller_path.end_with?(controller_name_suffix)
-    [NAV_LINK_BASE, active ? NAV_LINK_ACTIVE : nil].compact.join(" ")
+    [ NAV_LINK_BASE, active ? NAV_LINK_ACTIVE : nil ].compact.join(" ")
   end
 
   def meta_tags(title:, description:, image: nil, type: :website, published_at: nil)
@@ -59,7 +59,7 @@ module ApplicationHelper
     archived:  "bg-surface text-muted",
     photo:     "bg-blue-bg text-blue-text",
     video:     "bg-purple-bg text-purple-text",
-    mixed:     "bg-amber-bg text-amber-text",
+    mixed:     "bg-amber-bg text-amber-text"
   }.freeze
 
   def badge(status)

@@ -30,7 +30,7 @@ class Admin::QuicksControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference("FieldItem.count") do
       post admin_quick_path, params: {
-        field_series: { title: "Quick Test", photos: [photo] }
+        field_series: { title: "Quick Test", photos: [ photo ] }
       }
     end
 

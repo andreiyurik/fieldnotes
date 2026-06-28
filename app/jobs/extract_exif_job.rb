@@ -34,7 +34,7 @@ class ExtractExifJob < ApplicationJob
   private
 
   def read_exif(path)
-    JSON.parse(IO.popen(["exiftool", "-j", "-n", path], &:read))&.first
+    JSON.parse(IO.popen([ "exiftool", "-j", "-n", path ], &:read))&.first
   rescue => e
     Rails.logger.error("ExtractExifJob EXIF read failed: #{e.message}")
     nil

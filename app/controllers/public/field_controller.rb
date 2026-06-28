@@ -4,13 +4,11 @@ class Public::FieldController < Public::BaseController
   def index
     @series = FieldSeries.includes(field_items: { photo_attachment: :blob }).order(created_at: :desc)
     fresh_when @series
-
   end
 
   def show
     @series = FieldSeries.includes(field_items: { photo_attachment: :blob }).find_by!(slug: params[:slug])
     Rails.event.notify("field.viewed", field_series_id: @series.id, path: request.path)
     fresh_when @series
-
   end
 end

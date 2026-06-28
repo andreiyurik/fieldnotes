@@ -6,8 +6,8 @@ xml.rss version: "2.0" do
     xml.description "Essays, builds, and field notes"
     xml.language "en"
 
-    feed_items = @essays.map { |e| [e, e.published_at] } +
-                 @series.map { |s| [s, s.created_at] }
+    feed_items = @essays.map { |e| [ e, e.published_at ] } +
+                 @series.map { |s| [ s, s.created_at ] }
 
     feed_items.sort_by { |_, date| date }.reverse_each do |item, _|
       xml.item do

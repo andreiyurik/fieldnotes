@@ -35,7 +35,7 @@ class ImageVariantJob < ApplicationJob
       image = Vips::Image.new_from_file(original_file.path)
       image = composite_watermark(image, setting)
 
-      Tempfile.create(["wm_base", ".png"]) do |tmp|
+      Tempfile.create([ "wm_base", ".png" ]) do |tmp|
         image.write_to_file(tmp.path)
 
         watermarked_blob = ActiveStorage::Blob.create_and_upload!(
@@ -77,10 +77,10 @@ class ImageVariantJob < ApplicationJob
   def watermark_coords(image, watermark, position)
     pad = 24
     case position
-    when "bottom_left"  then [pad,                                 image.height - watermark.height - pad]
-    when "top_right"    then [image.width - watermark.width - pad, pad]
-    when "top_left"     then [pad,                                 pad]
-    else                     [image.width - watermark.width - pad, image.height - watermark.height - pad]
+    when "bottom_left"  then [ pad,                                 image.height - watermark.height - pad ]
+    when "top_right"    then [ image.width - watermark.width - pad, pad ]
+    when "top_left"     then [ pad,                                 pad ]
+    else                     [ image.width - watermark.width - pad, image.height - watermark.height - pad ]
     end
   end
 end

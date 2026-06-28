@@ -1,5 +1,5 @@
 class Admin::EssaysController < Admin::BaseController
-  before_action :set_essay, only: [:edit, :update, :destroy]
+  before_action :set_essay, only: [ :edit, :update, :destroy ]
 
   def index
     @essays = Essay.includes(:cover_attachment).order(created_at: :desc)

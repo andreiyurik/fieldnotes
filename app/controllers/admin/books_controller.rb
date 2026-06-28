@@ -1,5 +1,5 @@
 class Admin::BooksController < Admin::BaseController
-  before_action :set_book, only: [:edit, :update, :destroy]
+  before_action :set_book, only: [ :edit, :update, :destroy ]
 
   def index
     @books = Book.by_year

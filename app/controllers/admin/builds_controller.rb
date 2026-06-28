@@ -1,5 +1,5 @@
 class Admin::BuildsController < Admin::BaseController
-  before_action :set_build, only: [:edit, :update, :destroy]
+  before_action :set_build, only: [ :edit, :update, :destroy ]
 
   def index
     @builds = Build.ordered

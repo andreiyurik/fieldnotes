@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
 
   scope module: :public do
-    resources :essays,  only: [:index, :show], param: :slug
-    resources :builds,  only: [:index]
-    resources :books,   only: [:index, :show]
-    resources :field,   only: [:index, :show], param: :slug
+    resources :essays,  only: [ :index, :show ], param: :slug
+    resources :builds,  only: [ :index ]
+    resources :books,   only: [ :index, :show ]
+    resources :field,   only: [ :index, :show ], param: :slug
     get "/now",     to: "now#show",     as: :now
     get "/feed",    to: "feed#index",   as: :feed
     get "/contact", to: "pages#contact", as: :contact
@@ -22,12 +22,12 @@ Rails.application.routes.draw do
     resources :builds, except: :show
     resources :books, except: :show
     resources :field do
-      resources :field_items, only: [:create, :destroy, :update]
+      resources :field_items, only: [ :create, :destroy, :update ]
     end
-    resource :quick, only: [:new, :create]
-    resource :profile, only: [:edit, :update]
-    resource :now, only: [:edit, :update]
-    resource :settings, only: [:edit, :update]
+    resource :quick, only: [ :new, :create ]
+    resource :profile, only: [ :edit, :update ]
+    resource :now, only: [ :edit, :update ]
+    resource :settings, only: [ :edit, :update ]
     namespace :settings do
       resource :watermark_regeneration, only: :create
     end

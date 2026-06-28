@@ -1,5 +1,5 @@
 class Admin::FieldController < Admin::BaseController
-  before_action :set_series, only: [:show, :edit, :update, :destroy]
+  before_action :set_series, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @series = FieldSeries.includes(field_items: :photo_attachment).order(created_at: :desc)

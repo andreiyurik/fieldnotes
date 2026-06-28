@@ -42,7 +42,7 @@ class BookLookupTest < ActiveSupport::TestCase
     body = {
       "ISBN:#{isbn}" => {
         "title"        => "Refactoring",
-        "authors"      => [{ "name" => "Martin Fowler" }],
+        "authors"      => [ { "name" => "Martin Fowler" } ],
         "publish_date" => "2018"
       }
     }.to_json

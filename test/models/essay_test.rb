@@ -118,13 +118,13 @@ class EssayTest < ActiveSupport::TestCase
 
   test "reading_time calculates based on 200 wpm" do
     essay = Essay.create!(title: "Long", status: "draft")
-    essay.update!(content: (["word"] * 500).join(" "))
+    essay.update!(content: ([ "word" ] * 500).join(" "))
     assert_equal 3, essay.reading_time
   end
 
   test "reading_time clamps at 60" do
     essay = Essay.create!(title: "Epic", status: "draft")
-    essay.update!(content: (["word"] * 15_000).join(" "))
+    essay.update!(content: ([ "word" ] * 15_000).join(" "))
     assert_equal 60, essay.reading_time
   end
 end

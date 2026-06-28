@@ -326,7 +326,7 @@ if lisbon_series && lisbon_series.field_items.empty?
     { file: "lisbon2.jpg",  caption: "Coastal stretch between Setúbal and Alcácer do Sal.", position: 3 },
     { file: "porto1.jpg",   caption: "Arriving into Porto Campanhã. The Douro valley opens up.", position: 4 },
     { file: "tiles1.jpg",   caption: "Azulejo panels on the platform wall at São Bento.", position: 5 },
-    { file: "porto2.jpg",   caption: "Ribeira at dusk. The bridge lights coming on.", position: 6 },
+    { file: "porto2.jpg",   caption: "Ribeira at dusk. The bridge lights coming on.", position: 6 }
   ]
 
   photos.each do |p|

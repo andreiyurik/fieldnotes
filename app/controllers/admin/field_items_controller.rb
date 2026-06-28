@@ -1,6 +1,6 @@
 class Admin::FieldItemsController < Admin::BaseController
   before_action :set_series
-  before_action :set_item, only: [:update, :destroy]
+  before_action :set_item, only: [ :update, :destroy ]
 
   def create
     @item = @series.field_items.new(field_item_params)

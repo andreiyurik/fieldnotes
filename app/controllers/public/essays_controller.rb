@@ -4,7 +4,6 @@ class Public::EssaysController < Public::BaseController
   def index
     @essays = Essay.published.includes(:cover_attachment)
     fresh_when @essays
-
   end
 
   def show
